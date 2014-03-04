@@ -1,6 +1,7 @@
 var path = require('path');
 var test = require('tape');
 var formatDate = require('date-format');
+var parallel = require('continuable-para');
 
 var buildChangelog = require('../index.js');
 var initRepo = require('./lib/init-repo.js');
@@ -20,8 +21,29 @@ test('run build-changelog on fresh repo', initRepo(__dirname, {
         assert.ifError(err);
         assert.equal(nextVersion, '0.2.0');
 
-        function onChangelog(err, changelog) {
+        parallel({
+            log: exec.bind(null, 'git log --oneline', {
+                cwd: folder
+            }),
+            diff: exec.bind(null, 'git diff HEAD~1 -- CHANGELOG', {
+                cwd: folder
+            }),
+            changelog: readChangelog.bind(null, path.join(folder, 'CHANGELOG'))
+        }, function (err, data) {
             assert.ifError(err);
+
+            var changelog = data.changelog;
+            var diff = data.diff;
+            var log = data.log;
+
+            var logLines = log.trim().split('\n');
+            assert.equal(logLines.length, 2);
+            assert.notEqual(logLines[0].indexOf('0.2.0'), -1);
+            assert.notEqual(logLines[1].indexOf('initial commit'), -1);
+
+
+            assert.notEqual(diff.indexOf('new file mode'), -1);
+
             assert.ok(changelog);
 
             var chunks = changelog.chunks;
@@ -44,31 +66,6 @@ test('run build-changelog on fresh repo', initRepo(__dirname, {
             assert.equal(line.message, 'initial commit');
 
             assert.end();
-        }
-
-        function onChangeLogDiff(err, stdout) {
-            assert.ifError(err);
-
-            assert.notEqual(stdout.indexOf('new file mode'), -1);
-
-            readChangelog(path.join(folder, 'CHANGELOG'), onChangelog);
-        }
-
-        function onLog(err, stdout) {
-            assert.ifError(err);
-
-            var lines = stdout.trim().split('\n');
-            assert.equal(lines.length, 2);
-            assert.notEqual(lines[0].indexOf('0.2.0'), -1);
-            assert.notEqual(lines[1].indexOf('initial commit'), -1);
-
-            exec('git diff HEAD~1 -- CHANGELOG', {
-                cwd: folder
-            }, onChangeLogDiff);
-        }
-
-        exec('git log --oneline', {
-            cwd: folder
-        }, onLog);
+        });
     });
 }));
