@@ -1,0 +1,32 @@
+{
+  "name": "build-changelog",
+  "version": "1.0.0",
+  "description": "A CLI to auto-generate a deploy ready changelog",
+  "keywords": [],
+  "author": "Raynos <raynos2@gmail.com>",
+  "repository": "git://github.com/uber/build-changelog.git",
+  "main": "index",
+  "homepage": "https://github.com/uber/build-changelog",
+  "bugs": {
+    "url": "https://github.com/uber/build-changelog/issues",
+    "email": "raynos2@gmail.com"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "mocha": "~1.17.1",
+    "jshint": "2.4.2",
+    "istanbul": "~0.1.46"
+  },
+  "scripts": {
+    "test": "npm run jshint && NODE_ENV=test mocha --reporter spec",
+    "jshint": "jshint --verbose --exclude-path .gitignore .",
+    "cover": "istanbul cover --report none --print detail _mocha",
+    "shrinkwrap": "rm npm-shrinkwrap.json; rm -rf ./node_modules && npm cache clear && npm --registry=http://archive.uber.com/npm install && npm shrinkwrap --depth 100 --dev",
+    "view-cover": "istanbul report html && open ./coverage/index.html"
+  },
+  "engine": {
+    "node": ">= 0.8.x"
+  },
+  "private": true
+}
