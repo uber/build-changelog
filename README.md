@@ -24,6 +24,7 @@ Running `build-changelog` will do the following steps.
  - [ ] support major flag
  - [ ] support tree view in changelog
  - [ ] make commit shas optional
+ - [ ] write more docs
 
 ## Example
 
@@ -42,6 +43,12 @@ series(tasks, function (err) {
 })
 ```
 
+## Docs
+
+See [docs.mli][docs] for type definitions
+
+// TODO
+
 ## Installation
 
 `npm install build-changelog`
@@ -53,3 +60,5 @@ series(tasks, function (err) {
 ## Contributors
 
  - Raynos
+
+  [docs]: https://github.com/uber/build-changelog/tree/master/docs.mli
