@@ -63,7 +63,9 @@ build-changelog/exec := (cmd: String, opts?: {
 
 build-changelog := (folder: String | {
     folder: String,
+    nextVersion?: String,
     major?: Boolean,
+    patch?: Boolean,
     logFlags?: String
 }, cb: Callback<err: Error, nextVersion: String>)
 

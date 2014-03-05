@@ -127,7 +127,9 @@ See [docs.mli][docs] for type definitions
 ```ocaml
 build-changelog := (folder: String | {
     folder: String,
+    nextVersion?: String,
     major?: Boolean,
+    patch?: Boolean,
     logFlags?: String
 }, cb: Callback<err: Error, nextVersion: String>)
 ```
@@ -148,9 +150,22 @@ This is the `folder` in which the `CHANGELOG` will be written to.
   `package.json` and `npm-shrinkwrap.json` files there will also
   be edited.
 
+#### `options.nextVersion`
+
+When set to a valid semver string this version will be used to
+  set the package.json version to. When not set a version number
+  will be computed based on bumping either the minor, major or
+  patch version.
+
 #### `options.major`
 
 This flag defaults to `false`. When set to `true` the major
+  version number will be increased instead of the minor version
+  number.
+
+#### `options.patch`
+
+This flag defaults to `false`. When set to `true` the patch
   version number will be increased instead of the minor version
   number.
 

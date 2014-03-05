@@ -16,11 +16,7 @@ function readJson(file, cb) {
     });
 }
 
-function main(opts, cb) {
-    if (typeof opts === 'string') {
-        opts = { folder: opts };
-    }
-
+function computeVersion(opts, cb) {
     var package = path.join(opts.folder, 'package.json');
 
     readJson(package, function (err, json) {
@@ -32,6 +28,20 @@ function main(opts, cb) {
         var nextVersion = createNextVersion(
             currentVersion, opts);
 
+        cb(null, nextVersion);
+    });
+}
+
+function main(opts, cb) {
+    if (typeof opts === 'string') {
+        opts = { folder: opts };
+    }
+
+    function next(err, nextVersion) {
+        if (err) {
+            return cb(err);
+        }
+
         series(createTasks({
             folder: opts.folder,
             logFlags: opts.logFlags,
@@ -39,7 +49,13 @@ function main(opts, cb) {
         }), function (err) {
             cb(err, nextVersion);
         });
-    });
+    }
+
+    if (!opts.nextVersion) {
+        computeVersion(opts, next);
+    } else {
+        next(null, opts.nextVersion);
+    }
 }
 
 module.exports = main;
