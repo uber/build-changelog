@@ -17,6 +17,10 @@ function readJson(file, cb) {
 }
 
 function main(opts, cb) {
+    if (typeof opts === 'string') {
+        opts = { folder: opts };
+    }
+
     var package = path.join(opts.folder, 'package.json');
 
     readJson(package, function (err, json) {
