@@ -7,7 +7,11 @@ function installModule(opts, cb) {
     var file = path.join(opts.folder, 'package.json');
 
     transactJsonFile(file, function (package) {
-        if (package.scripts && !package.scripts.changelog) {
+        if (!package.scripts) {
+            package.scripts = {};
+        }
+
+        if (!package.scripts.changelog) {
             package.scripts.changelog = 'build-changelog';
         }
 
