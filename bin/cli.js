@@ -1,8 +1,6 @@
 var path = require('path');
 var parseArgs = require('minimist');
-// var ansidown = require('ansidown');
 var msee = require('msee');
-// var conch = require('conch');
 var fs = require('fs');
 
 var buildChangelog = require('../index.js');
@@ -20,7 +18,7 @@ function main(opts) {
         return printHelp();
     }
 
-    // var command = opts._[0];
+    var command = opts._[0];
 
     if (!opts.folder) {
         opts.folder = process.cwd();
@@ -28,6 +26,20 @@ function main(opts) {
 
     if (opts['log-flags']) {
         opts.logFlags = opts['log-flags'];
+    }
+
+    if (command === 'version') {
+        var nextVersion = opts._[1];
+
+        if (nextVersion === 'major') {
+            opts.major = true;
+        } else if (nextVersion === 'minor') {
+            opts.minor = true;
+        } else if (nextVersion === 'patch') {
+            opts.patch = true;
+        } else {
+            opts.nextVersion = nextVersion;
+        }
     }
 
     buildChangelog(opts, function (err, nextVersion) {
