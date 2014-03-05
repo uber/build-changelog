@@ -1,3 +1,7 @@
+(* ChangeLog types define what the changelog parser returns
+
+    It's the structured datatype for the CHANGELOG file.
+*)
 type ChangeLogHeader := {
     date: String,
     version: String,
@@ -20,6 +24,10 @@ type ChangeLog := {
     content: String
 }
 
+(* ChangeLog options are passed into each tasks function.
+
+    These must be constructed as seen in create-tasks.js
+*)
 type ChangelogOptions := {
     folder: String,
     nextVersion: String,
@@ -47,16 +55,19 @@ build-changelog/create-tasks := ({
     folder: String,
     nextVersion: String,
     logFlags: String
-}) => tasks: Array<Continuable>
+}) => tasks: Array<Thunk<Error>>
 
 build-changelog/exec := (cmd: String, opts?: {
     silent: Boolean
 }, Callback<Error, stdout: Buffer>)
 
-build-changelog := ({
+build-changelog := (folder: String | {
     folder: String,
-    major: Boolean,
+    major?: Boolean,
     logFlags?: String
 }, cb: Callback<err: Error, nextVersion: String>)
 
 build-changelog/parse-changelog := (content: String) => ChangeLog
+
+build-changelog/read-changelog := 
+    (filename: String, Callback<Error, ChangeLog>)
