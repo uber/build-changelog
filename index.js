@@ -26,7 +26,7 @@ function main(opts, cb) {
                 }
 
                 commitChanges(opts, function (err) {
-                    cb(err, nextVersion);
+                    cb(err, err ? null : nextVersion);
                 });
             });
         });
