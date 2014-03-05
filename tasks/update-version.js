@@ -4,7 +4,7 @@ var path = require('path');
 var computeVersion = require('./compute-version.js');
 var transactJsonFile = require('../lib/transact-json-file.js');
 
-function bumpMinor(opts, cb) {
+function updateVersion(opts, cb) {
     function next(err, nextVersion) {
         if (err) {
             return cb(err);
@@ -33,4 +33,4 @@ function bumpMinor(opts, cb) {
     }
 }
 
-module.exports = bumpMinor;
+module.exports = updateVersion;

@@ -81,7 +81,7 @@ e3b8fd4 docs
 ### Involved example
 
 ```js
-var bumpMinor = require('build-changelog/tasks/bump-minor')
+var updateVersion = require('build-changelog/tasks/update-version')
 var updateChangelog = require('build-changelog/tasks/update-changelog')
 var commitChanges = require('build-changelog/tasks/commit-changes')
 
@@ -93,7 +93,7 @@ var opts = {
 
 // skip this step if you dont want to change the package.json
 // version
-bumpMinor(opts, function (err) {
+updateVersion(opts, function (err) {
     if (err) throw err;
 
     updateChangelog(opts, function (err) {

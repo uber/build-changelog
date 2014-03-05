@@ -56,7 +56,7 @@ type ChangelogOptions := {
     patch: Boolean
 }
 
-build-changelog/tasks/bump-minor := 
+build-changelog/tasks/update-version := 
     (ChangelogOptions, Callback)
 
 build-changelog/tasks/commit-changes := 

@@ -1,4 +1,4 @@
-var bumpMinor = require('./tasks/bump-minor.js');
+var updateVersion = require('./tasks/update-version.js');
 var updateChangelog = require('./tasks/update-changelog.js');
 var commitChanges = require('./tasks/commit-changes.js');
 
@@ -7,7 +7,7 @@ function main(opts, cb) {
         opts = { folder: opts };
     }
 
-    bumpMinor(opts, function (err, nextVersion) {
+    updateVersion(opts, function (err, nextVersion) {
         if (err) {
             return cb(err);
         }
