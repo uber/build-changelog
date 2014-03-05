@@ -21,33 +21,26 @@ function createNextVersion(currentVersion, opts) {
 
     return version.format();
 }
-
-function readJson(file, cb) {
-    fs.readFile(file, function (err, buf) {
-        if (err) {
-            return cb(err);
-        }
-
-        jsonParse(String(buf), cb);
-    });
-}
-
 function computeVersion(opts, cb) {
     var package = path.join(opts.folder, 'package.json');
 
-    readJson(package, function (err, json) {
+    fs.readFile(package, function (err, buf) {
         if (err) {
             return cb(err);
         }
 
-        var currentVersion = json.version;
-        var nextVersion = createNextVersion(
-            currentVersion, opts);
+        jsonParse(String(buf), function (err, json) {
+            if (err) {
+                return cb(err);
+            }
 
-        cb(null, nextVersion);
+            var currentVersion = json.version;
+            var nextVersion = createNextVersion(
+                currentVersion, opts);
+
+            cb(null, nextVersion);
+        });
     });
 }
-
-computeVersion.createNextVersion = createNextVersion;
 
 module.exports = computeVersion;
