@@ -1,5 +1,3 @@
-
-
 # build-changelog
 
 A CLI to auto-generate a deploy ready changelog
@@ -10,6 +8,7 @@ A CLI to auto-generate a deploy ready changelog
     - [Usage](#usage)
         - [Steps of changelog procedure](#steps-of-changelog-procedure)
     - [Example](#example)
+    - [Example changelog file](#example-changelog-file)
         - [Involved example](#involved-example)
         - [Parsing a changelog file](#parsing-a-changelog-file)
     - [Docs](#docs)
@@ -22,7 +21,8 @@ A CLI to auto-generate a deploy ready changelog
             - [`options.folder`](#optionsfolder-1)
             - [`options.nextVersion`](#optionsnextversion)
             - [`options.logFlags`](#optionslogflags-1)
-        - [`var changelog = parseChangelog()`](#var-changelog-=-parsechangelog)
+        - [`var changelog = parseChangelog(text)`](#var-changelog-=-parsechangelogtext)
+            - [`text`](#text)
     - [Installation](#installation)
     - [Tests](#tests)
     - [Contributors](#contributors)
