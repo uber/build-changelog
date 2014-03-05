@@ -19,7 +19,7 @@ type ChangeLogChunk := {
     lines: Array<ChangeLogLine>
 }
 
-type ChangeLog := {
+type ChangeLogRecord := {
     chunks: Array<ChangeLogChunk>,
     content: String
 }
@@ -33,8 +33,8 @@ build-changelog/changelog/header := (
     commit?: String
 ) => ChangeLogHeader
 
-build-changelog/changelog/index := 
-    (Array<ChangeLogChunk>, content: String) => ChangeLog
+build-changelog/changelog/record := 
+    (Array<ChangeLogChunk>, content: String) => ChangeLogRecord
 
 build-changelog/changelog/line := (
     sha: String | null,
@@ -42,10 +42,10 @@ build-changelog/changelog/line := (
     message: String
 ) => ChangeLogLine
 
-build-changelog/changelog/parse := (String) => ChangeLog
+build-changelog/changelog/parse := (String) => ChangeLogRecord
 
 build-changelog/changelog/read :=
-    (fileName: String, Callback<Error, ChangeLog>)
+    (fileName: String, Callback<Error, ChangeLogRecord>)
 
 (* ChangeLog options are passed into each tasks function. *)
 type ChangelogOptions := {

@@ -3,7 +3,7 @@ var matchHeaderLines = /^(\d{4}-\d{2}-\d{2}) +- +(\d+\.\d+\.\d+) +\(([0-9a-fA-F]
 var matchLogLine = /^([a-fA-F0-9]{7,})(?:\s+\((.+?)\))?\s+(.*)$/;
 
 var ChangeLogHeader = require('./header.js');
-var ChangeLog = require('./index.js');
+var ChangeLogRecord = require('./record.js');
 var ChangeLogLine = require('./line.js');
 var ChangeLogChunk = require('./chunk.js');
 
@@ -53,7 +53,7 @@ function parseChangelog(content) {
         );
     });
 
-    return new ChangeLog(chunks, content);
+    return new ChangeLogRecord(chunks, content);
 }
 
 module.exports = parseChangelog;

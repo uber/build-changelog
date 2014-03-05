@@ -197,7 +197,7 @@ By default `build-changelog` runs `git log --decorate --oneline`.
 ### `var changelog = parseChangelog(text)`
 
 ```ocaml
-type ChangeLog := {
+type ChangeLogRecord := {
     chunks: Array<{
         header: {
             date: String,
@@ -213,8 +213,8 @@ type ChangeLog := {
     content: String
 }
 
-build-changelog/parse-changelog := 
-    (content: String) => ChangeLog
+build-changelog/changelog/record := 
+    (content: String) => ChangeLogRecord
 ```
 
 `parseChangelog(text)` will return a `ChangeLog` data record
