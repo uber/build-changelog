@@ -3,6 +3,7 @@ var parseArgs = require('minimist');
 var msee = require('msee');
 var fs = require('fs');
 
+var installModule = require('./install.js');
 var buildChangelog = require('../index.js');
 
 function printHelp() {
@@ -26,6 +27,16 @@ function main(opts) {
 
     if (opts['log-flags']) {
         opts.logFlags = opts['log-flags'];
+    }
+
+    if (command === 'install') {
+        return installModule(opts, function (err) {
+            if (err) {
+                throw err;
+            }
+
+            console.log('added build-changelog to package.json');
+        });
     }
 
     if (command === 'version') {
