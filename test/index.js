@@ -9,3 +9,4 @@ test('buildChangelog is a function', function (assert) {
 });
 
 require('./fresh-repo.js');
+require('./second-call.js');

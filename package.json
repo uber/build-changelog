@@ -16,7 +16,8 @@
     "xtend": "~2.1.2",
     "continuable-para": "^1.2.0",
     "date-format": "0.0.2",
-    "semver": "^2.2.1"
+    "semver": "^2.2.1",
+    "safe-json-parse": "^1.0.1"
   },
   "devDependencies": {
     "mocha": "~1.17.1",

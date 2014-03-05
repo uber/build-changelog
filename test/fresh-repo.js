@@ -2,6 +2,7 @@ var path = require('path');
 var test = require('tape');
 var formatDate = require('date-format');
 var parallel = require('continuable-para');
+var fs = require('fs');
 
 var buildChangelog = require('../index.js');
 var initRepo = require('./lib/init-repo.js');
@@ -28,6 +29,10 @@ test('run build-changelog on fresh repo', initRepo(__dirname, {
             diff: exec.bind(null, 'git diff HEAD~1 -- CHANGELOG', {
                 cwd: folder
             }),
+            diff2: exec.bind(null, 'git diff HEAD~1 -- package.json', {
+                cwd: folder
+            }),
+            package: fs.readFile.bind(null, path.join(folder, 'package.json')),
             changelog: readChangelog.bind(null, path.join(folder, 'CHANGELOG'))
         }, function (err, data) {
             assert.ifError(err);
@@ -41,8 +46,13 @@ test('run build-changelog on fresh repo', initRepo(__dirname, {
             assert.notEqual(logLines[0].indexOf('0.2.0'), -1);
             assert.notEqual(logLines[1].indexOf('initial commit'), -1);
 
-
             assert.notEqual(diff.indexOf('new file mode'), -1);
+
+            assert.equal(
+                JSON.parse(String(data.package)).version,
+                '0.2.0');
+
+            assert.notEqual(data.diff2.indexOf('0.2.0'), -1);
 
             assert.ok(changelog);
 

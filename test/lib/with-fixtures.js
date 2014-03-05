@@ -103,4 +103,7 @@ function withFixtures(dirname, fixtures, task, callback) {
     });
 }
 
+withFixtures.createFixtures = createFixtures;
+withFixtures.teardownFixtures = teardownFixtures;
+
 module.exports = withFixtures;

@@ -20,14 +20,20 @@ function execCmd(cmd, opts) {
     return exec.bind(null, cmd, opts);
 }
 
-function gitStart(dirname, cb) {
-    var commitCmd = 'git commit -m \'initial commit\'';
+function gitStart(dirname, opts, cb) {
+    if (typeof opts === 'function') {
+        cb = opts;
+        opts = {};
+    }
+
+    var message = opts.message || 'initial commit';
+    var commitCmd = 'git commit -m \'' + message + '\'';
 
     series([
-        execCmd('git init', { cwd: dirname }),
+        !opts.exists ? execCmd('git init', { cwd: dirname }) : null,
         execCmd('git add . --all', { cwd: dirname }),
         execCmd(commitCmd, { cwd: dirname })
-    ], cb);
+    ].filter(Boolean), cb);
 }
 
 module.exports = gitStart;
