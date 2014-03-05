@@ -18,7 +18,8 @@
     "date-format": "0.0.2",
     "semver": "^2.2.1",
     "safe-json-parse": "^1.0.1",
-    "minimist": "0.0.8"
+    "minimist": "0.0.8",
+    "msee": "^0.1.1"
   },
   "devDependencies": {
     "jshint": "2.4.2",

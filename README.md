@@ -31,6 +31,8 @@ A CLI to auto-generate a deploy ready changelog
 
 `$ build-changelog [flags]`
 
+See [usage.md][usage] for more documentation
+
 ### Steps of changelog procedure
 
 Running `build-changelog` will do the following steps.
@@ -264,4 +266,5 @@ A `"string"` of text, this will most likely be taken by reading
  - Raynos
 
   [docs]: https://github.com/uber/build-changelog/tree/master/docs.mli
+  [usage]: https://github.com/uber/build-changelog/tree/master/bin/usage.md
   [thunk]: https://github.com/Raynos/continuable/blob/master/spec.md
