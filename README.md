@@ -1,6 +1,31 @@
+
+
 # build-changelog
 
 A CLI to auto-generate a deploy ready changelog
+
+**Table of Contents**  *generated with [DocToc](http://doctoc.herokuapp.com/)*
+
+- [build-changelog](#build-changelog)
+    - [Usage](#usage)
+        - [Steps of changelog procedure](#steps-of-changelog-procedure)
+    - [Example](#example)
+        - [Involved example](#involved-example)
+        - [Parsing a changelog file](#parsing-a-changelog-file)
+    - [Docs](#docs)
+        - [Type definitions](#type-definitions)
+        - [`buildChangelog(options, cb<Error, String>)`](#buildchangelogoptions-cb<error-string>)
+            - [`options.folder`](#optionsfolder)
+            - [`options.major`](#optionsmajor)
+            - [`options.logFlags`](#optionslogflags)
+        - [`var tasks = createTasks(options)`](#var-tasks-=-createtasksoptions)
+            - [`options.folder`](#optionsfolder-1)
+            - [`options.nextVersion`](#optionsnextversion)
+            - [`options.logFlags`](#optionslogflags-1)
+        - [`var changelog = parseChangelog()`](#var-changelog-=-parsechangelog)
+    - [Installation](#installation)
+    - [Tests](#tests)
+    - [Contributors](#contributors)
 
 ## Usage
 
@@ -32,6 +57,25 @@ buildChangelog(process.cwd(), function (err, nextVersion) {
 
     console.log('the new version', nextVersion);
 });
+```
+
+## Example changelog file
+
+```
+2014-03-04 - 1.1.0 (f6ec3cc)
+f6ec3cc (HEAD, initial-version) better documentation
+e207a6e allow a string opts
+0a77206 (origin/initial-version) make npm run cover work
+df03ac1 test with two calls
+b8b0f0f refactor test
+fa1b602 added a naive cli
+bd78f26 added tests
+d3df8cc initial code
+ca5bda1 the individual tasks
+e3b8fd4 docs
+8b5d269 (origin/master, master) initial
+
+
 ```
 
 ### Involved example
@@ -141,7 +185,56 @@ It is the users responsibility to call each of these thunks in
 #### `options.folder`
 
 The same `folder` as in `buildChangelog()`. This defines where
-  the `package.json`, `npm-shrinkwrap.json`
+  the `package.json`, `npm-shrinkwrap.json` and `CHANGELOG` files
+  will be read from and written to
+
+#### `options.nextVersion`
+
+You must supply a version string that's valid `semver` to 
+  `createTasks()`. this will be the new version written to disk
+  and written to the top of the `CHANGELOG`.
+
+#### `options.logFlags`
+
+Just like `buildChangelog()` you pass in custom `logFlags` to
+  customize how the commit lines are pulled out of `git`.
+
+### `var changelog = parseChangelog(text)`
+
+```ocaml
+type ChangeLog := {
+    chunks: Array<{
+        header: {
+            date: String,
+            version: String,
+            commit?: String
+        },
+        lines: Array<{
+            sha?: String,
+            decorations?: Array<String>,
+            message: String 
+        }>
+    }>,
+    content: String
+}
+
+build-changelog/parse-changelog := 
+    (content: String) => ChangeLog
+```
+
+`parseChangelog(text)` will return a `ChangeLog` data record
+  that is the structured form of the textual `CHANGELOG` file
+  content.
+
+the `changelog` returned contains an array of chunks, each
+  chunk correspond to a versioned section of the changelog. A
+  chunk contains a header section, for the versioned header line
+  and an array of lines for each commit message.
+
+#### `text`
+
+A `"string"` of text, this will most likely be taken by reading
+  your `CHANGELOG` file
 
 ## Installation
 
