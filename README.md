@@ -83,28 +83,40 @@ e3b8fd4 docs
 ### Involved example
 
 ```js
-var series = require('continuable-series')
-var createTasks = require('build-changelog/create-tasks')
+var bumpMinor = require('build-changelog/tasks/bump-minor')
+var updateChangelog = require('build-changelog/tasks/update-changelog')
+var commitChanges = require('build-changelog/tasks/commit-changes')
 
-// returns an array of three tasks matching the above steps
-var tasks = createTasks({
+var opts = {
     nextVersion: '1.1.0',
     logFlags: '--first-parent',
     folder: process.cwd()
-})
+};
 
-series(tasks, function (err) {
+// skip this step if you dont want to change the package.json
+// version
+bumpMinor(opts, function (err) {
     if (err) throw err;
 
-    // executed the steps
-})
+    updateChangelog(opts, function (err) {
+        if (err) throw err;
+
+        // skip this step if you dont want to commit or tag your
+        // git repo
+        commitChanges(opts, function (err) {
+            if (err) throw err;
+
+            console.log('done');
+        });
+    });
+});
 ```
 
 ### Parsing a changelog file
 
 ```js
 var path = require('path')
-var readChangelog = require('build-changelog/read-changelog')
+var readChangelog = require('build-changelog/changelog/read')
 
 var loc = path.join(process.cwd(), 'CHANGELOG')
 
@@ -181,40 +193,6 @@ By default `build-changelog` runs `git log --decorate --oneline`.
   a merge only git strategy you may want to pass `--first-parent`
   or if you have a squash only git strategy you may want to pass
   `--no-merges`.
-
-### `var tasks = createTasks(options)`
-
-```ocaml
-build-changelog/create-tasks := ({
-    folder: String,
-    nextVersion: String,
-    logFlags: String
-}) => tasks: Array<Thunk<Error>>
-```
-
-`createTasks` returns a triplet of three [thunks][thunk]. Each 
-  one of the thunks represents one of the three steps defined
-  above.
-
-It is the users responsibility to call each of these thunks in
-  order serially to execute the build changelog procedure.
-
-#### `options.folder`
-
-The same `folder` as in `buildChangelog()`. This defines where
-  the `package.json`, `npm-shrinkwrap.json` and `CHANGELOG` files
-  will be read from and written to
-
-#### `options.nextVersion`
-
-You must supply a version string that's valid `semver` to 
-  `createTasks()`. this will be the new version written to disk
-  and written to the top of the `CHANGELOG`.
-
-#### `options.logFlags`
-
-Just like `buildChangelog()` you pass in custom `logFlags` to
-  customize how the commit lines are pulled out of `git`.
 
 ### `var changelog = parseChangelog(text)`
 
