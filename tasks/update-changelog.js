@@ -1,11 +1,11 @@
 var parallel = require('continuable-para');
 var formatDate = require('date-format');
-var format = require('util').format;
 var fs = require('fs');
 var path = require('path');
 
 var exec = require('../lib/exec.js');
 var readChangelog = require('../changelog/read.js');
+var ChangeLogHeader = require('../changelog/header.js');
 
 function createCommands(changelog, opts) {
     var headCmd = 'git rev-parse --short HEAD';
@@ -42,14 +42,13 @@ function updateChangelog(opts, cb) {
                 return cb(err);
             }
 
-            var time = formatDate('yyyy-MM-dd', new Date());
-            var head = String(result.head.split('\n')[0]);
-            var title = format('%s - %s (%s)\n', time,
-                nextVersion, head);
-
+            var header = new ChangeLogHeader(
+                formatDate('yyyy-MM-dd'),
+                nextVersion,
+                result.head.split('\n')[0]
+            );
             var content = changelog ? changelog.content : '';
-
-            var newContent = title + result.log +
+            var newContent = header.toString() + result.log +
                 '\n\n' + content;
 
             fs.writeFile(changelogFile, newContent, cb);
