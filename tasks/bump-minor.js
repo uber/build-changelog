@@ -1,5 +1,6 @@
 var parallel = require('continuable-para');
 var fs = require('fs');
+var path = require('path');
 
 function transactFile(file, lambda, cb) {
     fs.readFile(file, function (err, buf) {
@@ -14,13 +15,12 @@ function transactFile(file, lambda, cb) {
 function bumpMinor(opts, cb) {
     function setVersion(buf) {
         var package = JSON.parse(String(buf));
-        package.version = nextVersion;
+        package.version = opts.nextVersion;
         return JSON.stringify(package, null, '  ');
     }
 
-    var nextVersion = opts.nextVersion;
-    var packageFile = opts.packageFile;
-    var shrinkwrapFile = opts.shrinkwrapFile;
+    var packageFile = path.join(opts.folder, 'package.json');
+    var shrinkwrapFile = path.join(opts.folder, 'npm-shrinkwrap.json');
 
     parallel([
         transactFile.bind(null, packageFile, setVersion),

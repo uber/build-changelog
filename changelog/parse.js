@@ -2,27 +2,10 @@ var isDoubleNewLine = /\n{2,}/g;
 var matchHeaderLines = /^(\d{4}-\d{2}-\d{2}) +- +(\d+\.\d+\.\d+) +\(([0-9a-fA-F]{6,})\)/;
 var matchLogLine = /^([a-fA-F0-9]{7,})(?:\s+\((.+?)\))?\s+(.*)$/;
 
-function ChangeLogHeader(date, version, commit) {
-    this.date = date;
-    this.version = version;
-    this.commit = commit || null;
-}
-
-function ChangeLogLine(sha, decorations, message) {
-    this.sha = sha || null;
-    this.decorations = decorations || null;
-    this.message = message;
-}
-
-function ChangeLogChunk(header, lines) {
-    this.header = header;
-    this.lines = lines;
-}
-
-function ChangeLog(chunks, content) {
-    this.chunks = chunks;
-    this.content = content;
-}
+var ChangeLogHeader = require('./header.js');
+var ChangeLog = require('./index.js');
+var ChangeLogLine = require('./line.js');
+var ChangeLogChunk = require('./chunk.js');
 
 function parseLogLine(logLine) {
     var match = matchLogLine.exec(logLine);

@@ -6,8 +6,8 @@ var fs = require('fs');
 
 var buildChangelog = require('../index.js');
 var initRepo = require('./lib/init-repo.js');
-var exec = require('../exec.js');
-var readChangelog = require('../read-changelog.js');
+var exec = require('../lib/exec.js');
+var readChangelog = require('../changelog/read.js');
 
 var folder = path.join(__dirname, 'repo');
 

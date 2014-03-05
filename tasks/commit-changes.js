@@ -1,7 +1,7 @@
 var format = require('util').format;
 var series = require('continuable-series');
 
-var exec = require('../exec.js');
+var exec = require('../lib/exec.js');
 
 function commitChanges(opts, cb) {
     var nextVersion = opts.nextVersion;

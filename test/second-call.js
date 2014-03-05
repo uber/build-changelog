@@ -4,8 +4,8 @@ var series = require('continuable-series');
 var parallel = require('continuable-para');
 var fs = require('fs');
 
-var exec = require('../exec.js');
-var readChangelog = require('../read-changelog.js');
+var exec = require('../lib/exec.js');
+var readChangelog = require('../changelog/read.js');
 var buildChangelog = require('../index.js');
 var initRepo = require('./lib/init-repo.js');
 var gitStart = require('./lib/git-start.js');

@@ -1,6 +1,6 @@
 var series = require('continuable-series');
 
-var exec = require('../../exec.js');
+var exec = require('../../lib/exec.js');
 
 var DEBUG = false;
 

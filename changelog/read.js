@@ -1,6 +1,6 @@
 var fs = require('fs');
 
-var parseChangeLog = require('./parse-changelog.js');
+var parseChangeLog = require('./parse.js');
 
 function readChangelog(file, cb) {
     fs.readFile(file, 'utf8', function (err, content) {
