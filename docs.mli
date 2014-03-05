@@ -16,7 +16,7 @@ type ChangeLogLine := {
 
 type ChangeLogChunk := {
     header: ChangeLogHeader
-    lines: ChangeLogLine
+    lines: Array<ChangeLogLine>
 }
 
 type ChangeLog := {
