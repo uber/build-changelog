@@ -1,6 +1,6 @@
 {
   "name": "build-changelog",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "description": "A CLI to auto-generate a deploy ready changelog",
   "keywords": [],
   "author": "Raynos <raynos2@gmail.com>",
@@ -12,18 +12,33 @@
     "email": "raynos2@gmail.com"
   },
   "dependencies": {
+    "continuable-series": "~1.2.0",
+    "xtend": "~2.1.2",
+    "continuable-para": "^1.2.0",
+    "date-format": "0.0.2",
+    "semver": "^2.2.1",
+    "safe-json-parse": "^1.0.1",
+    "minimist": "0.0.8",
+    "msee": "^0.1.1"
   },
   "devDependencies": {
-    "mocha": "~1.17.1",
     "jshint": "2.4.2",
-    "istanbul": "~0.1.46"
+    "istanbul": "~0.1.46",
+    "tap-spec": "^0.1.4",
+    "tape": "^2.6.0",
+    "uuid": "^1.4.1",
+    "rimraf": "^2.2.6",
+    "pre-commit": "0.0.4"
   },
   "scripts": {
-    "test": "npm run jshint && NODE_ENV=test mocha --reporter spec",
+    "test": "npm run jshint && NODE_ENV=test node test/index.js | tspec",
     "jshint": "jshint --verbose --exclude-path .gitignore .",
-    "cover": "istanbul cover --report none --print detail _mocha",
+    "cover": "istanbul cover --report none --print detail test/index.js",
     "shrinkwrap": "rm npm-shrinkwrap.json; rm -rf ./node_modules && npm cache clear && npm --registry=http://archive.uber.com/npm install && npm shrinkwrap --depth 100 --dev",
     "view-cover": "istanbul report html && open ./coverage/index.html"
+  },
+  "bin": {
+    "build-changelog": "./bin/cli"
   },
   "engine": {
     "node": ">= 0.8.x"

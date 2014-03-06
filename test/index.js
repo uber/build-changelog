@@ -1,9 +1,12 @@
-var test = global.it;
-var assert = require('assert');
+var test = require('tape');
 
 var buildChangelog = require('../index.js');
 
-test('buildChangelog is a function', function (end) {
+test('buildChangelog is a function', function (assert) {
     assert.strictEqual(typeof buildChangelog, 'function');
-    end();
+
+    assert.end();
 });
+
+require('./fresh-repo.js');
+require('./second-call.js');

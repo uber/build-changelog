@@ -1,0 +1,50 @@
+2014-03-05 - 1.2.0 (76b1e3d)
+76b1e3d (HEAD, initial-version) add read command to CLI
+2272fa0 fixes changelog parsing bug
+52cb577 (tag: v1.1.0, origin/initial-version) 1.1.0
+
+
+2014-03-05 - 1.1.0 (cb06a7e)
+cb06a7e (HEAD, initial-version) gaurd against non existant shrinkwrap file
+9b9da8b allow customizing the filename
+c362770 support non shrinkwrap use case
+ad71f00 (origin/initial-version) updated tap-spec dep
+267feb3 fix require bug in install
+c7e07c2 make logFlags overwrite all flags
+a80c40c re-order variables
+8a9dcd3 rename bump minor to update version
+92843fa do not call lambda on content
+4fd1999 JSON.parse safely in transact json file
+a7f8608 moved computeVersion logic into bump-minor
+bd5d205 rename tasks file
+2c1dbe9 pass all exec options forward
+6b1bf86 rebuild index of README
+d23b937 rename index.js to record.js
+11c6f97 use default values
+0aaac8a updated docs to be upto date
+99cf94a default scripts to an empty hash
+bc36013 add install command
+4dff37f add version command
+dbe02ba moved transact file to lib
+05599a9 do not return a value if err
+15bab77 move formatting into the header itself
+c06453f move a ton of files & code around
+19ff38a add initial cli with help usage
+9deb571 refactored entry to allow for nextVersion argument
+5ddbf2f fix docs typo
+678f3c4 updated toc
+bba35f0 more docs
+1b42580 better documentation
+2da1aa1 allow a string opts
+c41c120 make npm run cover work
+15b1c03 test with two calls
+c32609d refactor test
+aaac29d added a naive cli
+3ced70f added tests
+c1c651c initial code
+48896cf the individual tasks
+4f0053b docs
+4aaab98 (origin/master, master) copy initial file
+8b5d269 initial
+
+
