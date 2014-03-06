@@ -1,6 +1,6 @@
 var path = require('path');
 
-var transactJsonFile = require('../transact-json-file.js');
+var transactJsonFile = require('../lib/transact-json-file.js');
 var version = require('../package.json').version;
 
 function installModule(opts, cb) {
