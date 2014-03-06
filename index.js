@@ -13,6 +13,13 @@ var defaults = {
     nextVersion: null
 };
 
+/* Invoke the following in order
+
+ - `updateVersion()` if `opts.version` is not set to `false`
+ - `updateChangelog()`
+ - `commitChanges()` if `opts.commit` is not set to false
+ - return `nextVersion`
+*/
 function main(opts, cb) {
     if (typeof opts === 'string') {
         opts = { folder: opts };
