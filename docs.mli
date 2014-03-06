@@ -73,5 +73,6 @@ build-changelog := (folder: String | {
     nextVersion?: String,
     major?: Boolean,
     patch?: Boolean,
+    filename?: String,
     logFlags?: String
 }, cb: Callback<err: Error, nextVersion: String>)

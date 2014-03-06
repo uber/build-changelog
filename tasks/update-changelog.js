@@ -9,7 +9,7 @@ var ChangeLogHeader = require('../changelog/header.js');
 
 function createCommands(changelog, opts) {
     var headCmd = 'git rev-parse --short HEAD';
-    var logFlags = opts.logFlags || '--decorate --oneline';
+    var logFlags = opts.logFlags || '';
     var logCmd = 'git log ' + logFlags;
 
     if (changelog && changelog.chunks.length) {
@@ -25,7 +25,7 @@ function createCommands(changelog, opts) {
 
 function updateChangelog(opts, cb) {
     var nextVersion = opts.nextVersion;
-    var changelogFile = path.join(opts.folder, 'CHANGELOG');
+    var changelogFile = path.join(opts.folder, opts.filename);
 
     readChangelog(changelogFile, function (err, changelog) {
         if (err) {

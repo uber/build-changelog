@@ -7,7 +7,10 @@ function commitChanges(opts, cb) {
     var nextVersion = opts.nextVersion;
     var folder = opts.folder;
 
-    var addCmd = 'git add CHANGELOG package.json npm-shrinkwrap.json';
+    var addCmd = format(
+        'git add %s package.json npm-shrinkwrap.json',
+        opts.filename
+    );
     var commitCmd = format('git commit -m \'%s\'', nextVersion);
     var tagCmd = format('git tag v%s -am \'%s\'', nextVersion,
         nextVersion);

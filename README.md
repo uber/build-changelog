@@ -142,6 +142,7 @@ build-changelog := (folder: String | {
     nextVersion?: String,
     major?: Boolean,
     patch?: Boolean,
+    filename?: String,
     logFlags?: String
 }, cb: Callback<err: Error, nextVersion: String>)
 ```
@@ -191,6 +192,11 @@ By default `build-changelog` runs `git log --decorate --oneline`.
   a merge only git strategy you may want to pass 
   `--oneline --first-parent` or if you have a squash 
   only git strategy you may want to pass `--oneline --no-merges`.
+
+#### `options.filename`
+
+This defaults to `CHANGELOG`. You can specify a different
+  filename to read and write the CHANGELOG to.
 
 ### `var changelog = parseChangelog(text)`
 

@@ -1,11 +1,21 @@
+var extend = require('xtend');
+
 var updateVersion = require('./tasks/update-version.js');
 var updateChangelog = require('./tasks/update-changelog.js');
 var commitChanges = require('./tasks/commit-changes.js');
+
+var defaults = {
+    major: false,
+    logFlags: '--decorate --oneline',
+    filename: 'CHANGELOG'
+};
 
 function main(opts, cb) {
     if (typeof opts === 'string') {
         opts = { folder: opts };
     }
+
+    opts = extend(defaults, opts);
 
     updateVersion(opts, function (err, nextVersion) {
         if (err) {
