@@ -87,7 +87,7 @@ var commitChanges = require('build-changelog/tasks/commit-changes')
 
 var opts = {
     nextVersion: '1.1.0',
-    logFlags: '--first-parent',
+    logFlags: '--oneline --decorate --first-parent',
     folder: process.cwd()
 };
 
@@ -187,10 +187,10 @@ To customize the generation of the actual `CHANGELOG` content
   you can pass extra flags to be passed to `git log`.
 
 By default `build-changelog` runs `git log --decorate --oneline`.
-  You may want to pass optional flags, for example if you have
-  a merge only git strategy you may want to pass `--first-parent`
-  or if you have a squash only git strategy you may want to pass
-  `--no-merges`.
+  You may want to pass different flags, for example if you have
+  a merge only git strategy you may want to pass 
+  `--oneline --first-parent` or if you have a squash 
+  only git strategy you may want to pass `--oneline --no-merges`.
 
 ### `var changelog = parseChangelog(text)`
 

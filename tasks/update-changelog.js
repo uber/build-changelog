@@ -9,11 +9,8 @@ var ChangeLogHeader = require('../changelog/header.js');
 
 function createCommands(changelog, opts) {
     var headCmd = 'git rev-parse --short HEAD';
-    var logCmd = 'git log --decorate --oneline';
-
-    if (opts.logFlags) {
-        logCmd += ' ' + opts.logFlags;
-    }
+    var logFlags = opts.logFlags || '--decorate --oneline';
+    var logCmd = 'git log ' + logFlags;
 
     if (changelog && changelog.chunks.length) {
         var commit = changelog.chunks[0].header.commit;
