@@ -37,6 +37,9 @@
     "shrinkwrap": "rm npm-shrinkwrap.json; rm -rf ./node_modules && npm cache clear && npm --registry=http://archive.uber.com/npm install && npm shrinkwrap --depth 100 --dev",
     "view-cover": "istanbul report html && open ./coverage/index.html"
   },
+  "bin": {
+    "build-changelog": "./bin/cli"
+  },
   "engine": {
     "node": ">= 0.8.x"
   },

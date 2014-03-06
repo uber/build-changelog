@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 var path = require('path');
 var parseArgs = require('minimist');
 var msee = require('msee');
