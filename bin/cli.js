@@ -5,6 +5,7 @@ var fs = require('fs');
 
 var installModule = require('./install.js');
 var buildChangelog = require('../index.js');
+var readChangelog = require('../changelog/read.js');
 
 function printHelp() {
     var loc = path.join(__dirname, 'usage.md');
@@ -27,6 +28,16 @@ function main(opts) {
 
     if (opts['log-flags']) {
         opts.logFlags = opts['log-flags'];
+    }
+
+    if (command === 'read') {
+        return readChangelog(opts._[1], function (err, changelog) {
+            if (err) {
+                throw err;
+            }
+
+            console.log(JSON.stringify(changelog, null, '  '));
+        });
     }
 
     if (command === 'install') {

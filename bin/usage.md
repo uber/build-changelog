@@ -41,3 +41,7 @@ This is the same as `build-changelog` except allows you to set
 
 This is an alternative to `npm version`, the main addition is
   changing the CHANGELOG file.
+
+## `build-changelog read <file>`
+
+Reads and parses a changelog file and writes JSON to stdout
