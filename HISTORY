@@ -1,3 +1,9 @@
+2014-03-05 - 1.2.0 (76b1e3d)
+76b1e3d (HEAD, initial-version) add read command to CLI
+2272fa0 fixes changelog parsing bug
+52cb577 (tag: v1.1.0, origin/initial-version) 1.1.0
+
+
 2014-03-05 - 1.1.0 (cb06a7e)
 cb06a7e (HEAD, initial-version) gaurd against non existant shrinkwrap file
 9b9da8b allow customizing the filename
