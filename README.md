@@ -19,6 +19,7 @@ A CLI to auto-generate a deploy ready changelog
       - [`options.major`](#optionsmajor)
       - [`options.patch`](#optionspatch)
       - [`options.logFlags`](#optionslogflags)
+      - [`options.filename`](#optionsfilename)
     - [`var changelog = parseChangelog(text)`](#var-changelog-=-parsechangelogtext)
       - [`text`](#text)
   - [Installation](#installation)
