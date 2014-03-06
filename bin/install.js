@@ -1,7 +1,6 @@
 var path = require('path');
 
 var transactJsonFile = require('../lib/transact-json-file.js');
-var version = require('../package.json').version;
 
 function installModule(opts, cb) {
     var file = path.join(opts.folder, 'package.json');
@@ -16,7 +15,7 @@ function installModule(opts, cb) {
         package.devDependencies = package.devDependencies || {};
 
         package.devDependencies['build-changelog'] =
-            '~' + version;
+          'git+ssh://git@github.com/uber/build-changelog.git';
 
         return package;
     }, cb);
