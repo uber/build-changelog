@@ -7,7 +7,8 @@ var commitChanges = require('./tasks/commit-changes.js');
 var defaults = {
     major: false,
     logFlags: '--decorate --oneline',
-    filename: 'CHANGELOG'
+    filename: 'CHANGELOG',
+    dateFormat: 'yyyy-MM-dd'
 };
 
 function main(opts, cb) {

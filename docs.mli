@@ -51,9 +51,11 @@ build-changelog/changelog/read :=
 type ChangelogOptions := {
     folder: String,
     nextVersion: String,
-    logFlags: String,
     major: Boolean,
-    patch: Boolean
+    patch: Boolean,
+    filename: String,
+    logFlags: String,
+    dateFormat: String
 }
 
 build-changelog/tasks/update-version := 
@@ -74,5 +76,6 @@ build-changelog := (folder: String | {
     major?: Boolean,
     patch?: Boolean,
     filename?: String,
-    logFlags?: String
+    logFlags?: String,
+    dateFormat?: String
 }, cb: Callback<err: Error, nextVersion: String>)

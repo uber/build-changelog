@@ -1,5 +1,5 @@
 var isDoubleNewLine = /\n{2,}/g;
-var matchHeaderLines = /^(\d{4}-\d{2}-\d{2}) +- +(\d+\.\d+\.\d+) +\(([0-9a-fA-F]{6,})\)/;
+var matchHeaderLines = /^(.+?) +- +(\d+\.\d+\.\d+) +\(([0-9a-fA-F]{6,})\)/;
 var matchLogLine = /^([a-fA-F0-9]{7,})(?:\s+\((.+?)\))?\s+(.*)$/;
 
 var ChangeLogHeader = require('./header.js');

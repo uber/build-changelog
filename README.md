@@ -143,7 +143,8 @@ build-changelog := (folder: String | {
     major?: Boolean,
     patch?: Boolean,
     filename?: String,
-    logFlags?: String
+    logFlags?: String,
+    dateFormat?: String
 }, cb: Callback<err: Error, nextVersion: String>)
 ```
 
@@ -198,6 +199,14 @@ By default `build-changelog` runs `git log --decorate --oneline`.
 This defaults to `CHANGELOG`. You can specify a different
   filename to read and write the CHANGELOG to.
 
+#### `options.dateFormat`
+
+This defaults to `yyyy-MM-dd`. You can specify your own date
+  formatter that will be used to generate a timestamp in the
+  header line of the changelog sections.
+
+Any formatting string from [date-format][date-format] is valid
+
 ### `var changelog = parseChangelog(text)`
 
 ```ocaml
@@ -250,3 +259,4 @@ A `"string"` of text, this will most likely be taken by reading
   [docs]: https://github.com/uber/build-changelog/tree/master/docs.mli
   [usage]: https://github.com/uber/build-changelog/tree/master/bin/usage.md
   [thunk]: https://github.com/Raynos/continuable/blob/master/spec.md
+  [date-format]: https://github.com/nomiddlename/date-format

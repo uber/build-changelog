@@ -32,6 +32,10 @@ function main(opts) {
         opts.logFlags = opts['log-flags'];
     }
 
+    if (opts['date-format']) {
+        opts.dateFormat = opts['date-format'];
+    }
+
     if (command === 'read') {
         return readChangelog(opts._[1], function (err, changelog) {
             if (err) {

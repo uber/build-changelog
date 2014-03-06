@@ -40,7 +40,7 @@ function updateChangelog(opts, cb) {
             }
 
             var header = new ChangeLogHeader(
-                formatDate('yyyy-MM-dd'),
+                formatDate(opts.dateFormat),
                 nextVersion,
                 result.head.split('\n')[0]
             );

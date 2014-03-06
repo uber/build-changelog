@@ -4,15 +4,17 @@ Builds the CHANGELOG file and commits it to git. Either creates
   a new CHANGELOG file or appends to the top of an existing one.
 
 Options:
-    --major            bump the major version number
-    --log-flags=[str]  extra flags to pass to `git log`
-    --folder=[str]     sets the git repo & CHANGELOG location
-    --filename=[str]   the filename we write the CHANGELOG too
+    --major              bump the major version number
+    --log-flags=[str]    extra flags to pass to `git log`
+    --folder=[str]       sets the git repo & CHANGELOG location
+    --filename=[str]     the filename we write the CHANGELOG too
+    --date-format=[str]  the formatter for dates in CHANGELOG
 
  - `--major` defaults to `false`
  - `--log-flags` defaults to `--decorate --oneline`
  - `--folder` defaults to `process.cwd()`
  - `--filename` defaults to `CHANGELOG`
+ - `--date-format` defaults to `yyyy-MM-dd`
 
 ## `build-changelog --help`
 
