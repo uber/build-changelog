@@ -1,3 +1,8 @@
+2014-03-05 - 1.2.2 (2a36ed3)
+2a36ed3 (HEAD, origin/optional-steps, optional-steps) make commit & version steps optional
+bd271af (tag: v1.2.0, origin/initial-version, initial-version) 1.2.0
+
+
 2014-03-05 - 1.2.0 (76b1e3d)
 76b1e3d (HEAD, initial-version) add read command to CLI
 2272fa0 fixes changelog parsing bug
