@@ -24,7 +24,7 @@
   "devDependencies": {
     "jshint": "2.4.2",
     "istanbul": "~0.1.46",
-    "tap-spec": "^0.1.3",
+    "tap-spec": "^0.1.4",
     "tape": "^2.6.0",
     "uuid": "^1.4.1",
     "rimraf": "^2.2.6",
