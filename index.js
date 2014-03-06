@@ -7,7 +7,10 @@ var commitChanges = require('./tasks/commit-changes.js');
 var defaults = {
     major: false,
     logFlags: '--decorate --oneline',
-    filename: 'CHANGELOG'
+    filename: 'CHANGELOG',
+    commit: true,
+    version: true,
+    nextVersion: null
 };
 
 function main(opts, cb) {
@@ -15,25 +18,47 @@ function main(opts, cb) {
         opts = { folder: opts };
     }
 
+    if (!opts.folder) {
+        throw new Error('build-changelog: must specify `opts.folder`');
+    }
+
     opts = extend(defaults, opts);
 
-    updateVersion(opts, function (err, nextVersion) {
+    function finish(err) {
+        cb(err, err ? null : opts.nextVersion);
+    }
+
+    function doCommit(err) {
+        if (err) {
+            return cb(err);
+        }
+
+        if (opts.commit !== false) {
+            commitChanges(opts, finish);
+        } else {
+            process.nextTick(finish);
+        }
+    }
+
+    function doChangelog(err, nextVersion) {
         if (err) {
             return cb(err);
         }
 
         opts.nextVersion = opts.nextVersion || nextVersion;
 
-        updateChangelog(opts, function (err) {
-            if (err) {
-                return cb(err);
-            }
+        if (!opts.nextVersion) {
+            return cb(new Error('must specify next version'));
+        }
 
-            commitChanges(opts, function (err) {
-                cb(err, err ? null : nextVersion);
-            });
-        });
-    });
+        updateChangelog(opts, doCommit);
+    }
+
+    if (opts.version !== false) {
+        updateVersion(opts, doChangelog);
+    } else {
+        process.nextTick(doChangelog);
+    }
 }
 
 module.exports = main;

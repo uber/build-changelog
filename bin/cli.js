@@ -16,10 +16,6 @@ function printHelp() {
 }
 
 function main(opts) {
-    if (opts.h || opts.help) {
-        return printHelp();
-    }
-
     var command = opts._[0];
 
     if (!opts.folder) {
@@ -28,6 +24,22 @@ function main(opts) {
 
     if (opts['log-flags']) {
         opts.logFlags = opts['log-flags'];
+    }
+
+    if (!('commit' in opts)) {
+        opts.commit = true;
+    }
+
+    if (!('version' in opts)) {
+        opts.version = true;
+    }
+
+    if (opts['next-version']) {
+        opts.nextVersion = opts['next-version'];
+    }
+
+    if (opts.h || opts.help) {
+        return printHelp();
     }
 
     if (command === 'read') {

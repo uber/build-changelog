@@ -143,6 +143,8 @@ build-changelog := (folder: String | {
     major?: Boolean,
     patch?: Boolean,
     filename?: String,
+    commit?: Boolean,
+    version?: Boolean,
     logFlags?: String
 }, cb: Callback<err: Error, nextVersion: String>)
 ```
@@ -181,6 +183,21 @@ This flag defaults to `false`. When set to `true` the major
 This flag defaults to `false`. When set to `true` the patch
   version number will be increased instead of the minor version
   number.
+
+#### `opts.commit`
+
+This flag defaults to `true`. When it is set to `false` the 
+  committing steps will be skipped by `build-changelog`.
+
+This allows the user to create their own commits / tags.
+
+#### `opts.version`
+
+This flag defaults to `true`. When it is set to `false` the
+  version incrementing steps will be skipped by `build-changelog`
+
+This allows the user to increment & manager their version 
+  changes differently from their CHANGELOG changes
 
 #### `options.logFlags`
 
