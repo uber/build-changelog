@@ -4,15 +4,21 @@ Builds the CHANGELOG file and commits it to git. Either creates
   a new CHANGELOG file or appends to the top of an existing one.
 
 Options:
-    --major            bump the major version number
-    --log-flags=[str]  extra flags to pass to `git log`
-    --folder=[str]     sets the git repo & CHANGELOG location
-    --filename=[str]   the filename we write the CHANGELOG too
+    --major               bump the major version number
+    --log-flags=[str]     extra flags to pass to `git log`
+    --folder=[str]        sets the git repo & CHANGELOG location
+    --filename=[str]      the filename we write the CHANGELOG to
+    --no-commit           skip the committing & tagging step
+    --no-version          skip the version incrementing step
+    --next-version=[str]  specify the new version to be set
 
  - `--major` defaults to `false`
  - `--log-flags` defaults to `--decorate --oneline`
  - `--folder` defaults to `process.cwd()`
  - `--filename` defaults to `CHANGELOG`
+ - `--commit` defaults to `true`
+ - `--version` defaults to `true`
+ - `--next-version` defaults to `null`
 
 ## `build-changelog --help`
 
