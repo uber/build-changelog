@@ -14,9 +14,9 @@ function parseLogLine(logLine) {
         return null;
     }
 
-    var decorations = match[2].split(',').map(function (s) {
+    var decorations = match[2] ? match[2].split(',').map(function (s) {
         return s.trim();
-    });
+    }) : null;
 
     return new ChangeLogLine(match[1], decorations, match[3]);
 }
