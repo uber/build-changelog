@@ -1,3 +1,9 @@
+2014-03-12 - 1.3.0 (13b6935)
+13b6935 (HEAD, origin/master, master) Merge pull request #1 from uber/initial-version
+488cf14 (origin/initial-version) make it executable
+bd271af (tag: v1.2.0) 1.2.0
+
+
 2014-03-05 - 1.2.0 (76b1e3d)
 76b1e3d (HEAD, initial-version) add read command to CLI
 2272fa0 fixes changelog parsing bug
