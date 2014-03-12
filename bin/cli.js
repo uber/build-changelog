@@ -29,7 +29,7 @@ function main(opts) {
     var command = opts._[0];
 
     if (opts.h || opts.help || command === 'help') {
-        return printHelp();
+        return printHelp(opts);
     }
 
     if (!opts.folder) {
