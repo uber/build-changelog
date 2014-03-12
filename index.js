@@ -1,4 +1,5 @@
 var extend = require('xtend');
+var series = require('continuable-series');
 
 var updateVersion = require('./tasks/update-version.js');
 var updateChangelog = require('./tasks/update-changelog.js');
@@ -31,41 +32,35 @@ function main(opts, cb) {
 
     opts = extend(defaults, opts);
 
-    function finish(err) {
+    function doVersionUpdate(opts, cb) {
+        updateVersion(opts, function (err, nextVersion) {
+            if (err) {
+                return cb(err);
+            }
+
+            opts.nextVersion = opts.nextVersion || nextVersion;
+
+            if (!opts.nextVersion) {
+                return cb(new Error('must specify next version'));
+            }
+
+            cb(null);
+        });
+    }
+
+    // doVersionUpdate & commitChanges are togglable tasks
+    // that run by default
+    var tasks = [
+        opts.version !== false ?
+            doVersionUpdate.bind(null, opts) : null,
+        updateChangelog.bind(null, opts),
+        opts.commit !== false ?
+            commitChanges.bind(null, opts) : null
+    ].filter(Boolean);
+
+    series(tasks, function finish(err) {
         cb(err, err ? null : opts.nextVersion);
-    }
-
-    function doCommit(err) {
-        if (err) {
-            return cb(err);
-        }
-
-        if (opts.commit !== false) {
-            commitChanges(opts, finish);
-        } else {
-            process.nextTick(finish);
-        }
-    }
-
-    function doChangelog(err, nextVersion) {
-        if (err) {
-            return cb(err);
-        }
-
-        opts.nextVersion = opts.nextVersion || nextVersion;
-
-        if (!opts.nextVersion) {
-            return cb(new Error('must specify next version'));
-        }
-
-        updateChangelog(opts, doCommit);
-    }
-
-    if (opts.version !== false) {
-        updateVersion(opts, doChangelog);
-    } else {
-        process.nextTick(doChangelog);
-    }
+    });
 }
 
 module.exports = main;
