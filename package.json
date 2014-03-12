@@ -38,7 +38,7 @@
     "view-cover": "istanbul report html && open ./coverage/index.html"
   },
   "bin": {
-    "build-changelog": "./bin/cli"
+    "build-changelog": "./bin/cli.js"
   },
   "engine": {
     "node": ">= 0.8.x"
