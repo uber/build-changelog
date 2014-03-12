@@ -1,3 +1,11 @@
+2014-03-12 - 1.4.0 (b2d9310)
+b2d9310 (HEAD, master) Merge remote-tracking branch 'origin/master'
+e43f529 (tag: v1.3.0) 1.3.0
+0350b8f (origin/master) Merge pull request #6 from uber/fix-install-path
+93c31a9 (origin/fix-install-path, fix-install-path) add bin/cli.js
+5675e57 fix install path
+
+
 2014-03-12 - 1.3.0 (13b6935)
 13b6935 (HEAD, origin/master, master) Merge pull request #1 from uber/initial-version
 488cf14 (origin/initial-version) make it executable
