@@ -1,6 +1,6 @@
 {
   "name": "build-changelog",
-  "version": "1.4.0",
+  "version": "1.4.2",
   "description": "A CLI to auto-generate a deploy ready changelog",
   "keywords": [],
   "author": "Raynos <raynos2@gmail.com>",
