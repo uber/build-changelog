@@ -4,25 +4,33 @@ var path = require('path');
 var parseArgs = require('minimist');
 var msee = require('msee');
 var fs = require('fs');
+var template = require('string-template');
 
 var installModule = require('./install.js');
 var buildChangelog = require('../index.js');
 var readChangelog = require('../changelog/read.js');
 
-function printHelp() {
+function printHelp(opts) {
+    opts = opts || {};
+
     var loc = path.join(__dirname, 'usage.md');
     var content = fs.readFileSync(loc, 'utf8');
+
+    content = template(content, {
+        cmd: opts.cmd || 'build-changelog'
+    });
+
     return console.log(msee.parse(content, {
         paragraphStart: '\n'
     }));
 }
 
 function main(opts) {
-    if (opts.h || opts.help) {
-        return printHelp();
-    }
-
     var command = opts._[0];
+
+    if (opts.h || opts.help || command === 'help') {
+        return printHelp(opts);
+    }
 
     if (!opts.folder) {
         opts.folder = process.cwd();
