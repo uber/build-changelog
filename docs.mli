@@ -53,6 +53,7 @@ type ChangelogOptions := {
     nextVersion: String,
     logFlags: String,
     major: Boolean,
+    minor: Boolean,
     patch: Boolean
 }
 
@@ -72,6 +73,7 @@ build-changelog := (folder: String | {
     folder: String,
     nextVersion?: String,
     major?: Boolean,
+    minor?: Boolean,
     patch?: Boolean,
     filename?: String,
     logFlags?: String
