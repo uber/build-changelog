@@ -12,11 +12,11 @@ function createNextVersion(currentVersion, opts) {
         version.major++;
         version.minor = 0;
         version.patch = 0;
-    } else if (opts.patch) {
-        version.patch++;
-    } else {
+    } else if (opts.minor) {
         version.minor++;
         version.patch = 0;
+    } else if (opts.patch) {
+        version.patch++;
     }
 
     return version.format();
