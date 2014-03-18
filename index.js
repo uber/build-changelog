@@ -6,6 +6,8 @@ var commitChanges = require('./tasks/commit-changes.js');
 
 var defaults = {
     major: false,
+    minor: false,
+    patch: true,
     logFlags: '--decorate --oneline',
     filename: 'CHANGELOG'
 };

@@ -5,11 +5,13 @@ Builds the CHANGELOG file and commits it to git. Either creates
 
 Options:
     --major            bump the major version number
+    --minor            bump the minor version number
     --log-flags=[str]  extra flags to pass to `git log`
     --folder=[str]     sets the git repo & CHANGELOG location
     --filename=[str]   the filename we write the CHANGELOG too
 
  - `--major` defaults to `false`
+ - `--minor` defaults to `false`
  - `--log-flags` defaults to `--decorate --oneline`
  - `--folder` defaults to `process.cwd()`
  - `--filename` defaults to `CHANGELOG`

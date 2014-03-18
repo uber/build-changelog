@@ -20,7 +20,7 @@ test('run build-changelog on fresh repo', initRepo(__dirname, {
 }, function (assert) {
     buildChangelog({ folder: folder }, function (err, nextVersion) {
         assert.ifError(err);
-        assert.equal(nextVersion, '0.2.0');
+        assert.equal(nextVersion, '0.1.1');
 
         parallel({
             log: exec.bind(null, 'git log --oneline', {
@@ -43,16 +43,16 @@ test('run build-changelog on fresh repo', initRepo(__dirname, {
 
             var logLines = log.trim().split('\n');
             assert.equal(logLines.length, 2);
-            assert.notEqual(logLines[0].indexOf('0.2.0'), -1);
+            assert.notEqual(logLines[0].indexOf('0.1.1'), -1);
             assert.notEqual(logLines[1].indexOf('initial commit'), -1);
 
             assert.notEqual(diff.indexOf('new file mode'), -1);
 
             assert.equal(
                 JSON.parse(String(data.package)).version,
-                '0.2.0');
+                '0.1.1');
 
-            assert.notEqual(data.diff2.indexOf('0.2.0'), -1);
+            assert.notEqual(data.diff2.indexOf('0.1.1'), -1);
 
             assert.ok(changelog);
 
@@ -64,7 +64,7 @@ test('run build-changelog on fresh repo', initRepo(__dirname, {
             var header = chunk.header;
 
             assert.equal(header.date, formatDate('yyyy-MM-dd'));
-            assert.equal(header.version, '0.2.0');
+            assert.equal(header.version, '0.1.1');
             assert.ok(header.commit);
 
             var lines = chunk.lines;

@@ -141,6 +141,7 @@ build-changelog := (folder: String | {
     folder: String,
     nextVersion?: String,
     major?: Boolean,
+    minor?: Boolean,
     patch?: Boolean,
     filename?: String,
     logFlags?: String
@@ -173,14 +174,19 @@ When set to a valid semver string this version will be used to
 #### `options.major`
 
 This flag defaults to `false`. When set to `true` the major
-  version number will be increased instead of the minor version
+  version number will be increased instead of the patch version
+  number.
+
+#### `options.minor`
+
+This flag defaults to `false`. When set to `true` the minor
+  version number will be increased instead of the patch version
   number.
 
 #### `options.patch`
 
-This flag defaults to `false`. When set to `true` the patch
-  version number will be increased instead of the minor version
-  number.
+This flag defaults to `true`. When set to `true` the patch
+  version number will be increased.
 
 #### `options.logFlags`
 

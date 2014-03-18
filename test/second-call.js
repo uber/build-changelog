@@ -42,7 +42,7 @@ test('run build-changelog twice', setupRepo(__dirname, {
 }, function (assert) {
     buildChangelog({ folder: folder }, function (err, nextVersion) {
         assert.ifError(err);
-        assert.equal(nextVersion, '0.3.0');
+        assert.equal(nextVersion, '0.1.2');
 
         parallel({
             log: exec.bind(null, 'git log --oneline', {
@@ -57,9 +57,9 @@ test('run build-changelog twice', setupRepo(__dirname, {
 
             var logLines = data.log.trim().split('\n');
             assert.equal(logLines.length, 4);
-            assert.notEqual(logLines[0].indexOf('0.3.0'), -1);
+            assert.notEqual(logLines[0].indexOf('0.1.2'), -1);
             assert.notEqual(logLines[1].indexOf('an extra commit'), -1);
-            assert.notEqual(logLines[2].indexOf('0.2.0'), -1);
+            assert.notEqual(logLines[2].indexOf('0.1.1'), -1);
             assert.notEqual(logLines[3].indexOf('initial commit'), -1);
 
             var diff = data.diff;
@@ -74,8 +74,8 @@ test('run build-changelog twice', setupRepo(__dirname, {
             var chunk1 = changelog.chunks[0];
             var chunk2 = changelog.chunks[1];
 
-            assert.equal(chunk2.header.version, '0.2.0');
-            assert.equal(chunk1.header.version, '0.3.0');
+            assert.equal(chunk2.header.version, '0.1.1');
+            assert.equal(chunk1.header.version, '0.1.2');
 
             var lines1 = chunk1.lines;
             var lines2 = chunk2.lines;
@@ -89,9 +89,9 @@ test('run build-changelog twice', setupRepo(__dirname, {
             assert.equal(lines1[0].message, 'an extra commit');
             assert.deepEqual(lines1[0].decorations,
                 ['HEAD', 'master']);
-            assert.equal(lines1[1].message, '0.2.0');
+            assert.equal(lines1[1].message, '0.1.1');
             assert.deepEqual(lines1[1].decorations,
-                ['tag: v0.2.0']);
+                ['tag: v0.1.1']);
 
             assert.end();
         });
