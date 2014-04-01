@@ -17,7 +17,8 @@ function commitChanges(opts, cb) {
             opts.filename,
             shrinkwrap
         );
-        var commitCmd = format('git commit -m \'%s\'', nextVersion);
+        var commitCmd = format('git commit --no-verify -m \'%s\'',
+            nextVersion);
         var tagCmd = format('git tag v%s -am \'%s\'', nextVersion,
             nextVersion);
 
