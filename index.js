@@ -8,7 +8,7 @@ var defaults = {
     major: false,
     minor: false,
     patch: true,
-    logFlags: '--decorate --oneline',
+    logFlags: '--decorate --first-parent --oneline',
     filename: 'CHANGELOG'
 };
 
