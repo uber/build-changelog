@@ -1,22 +1,39 @@
 var path = require('path');
+var template = require('string-template');
 
 var version = require('../package.json').version;
 var transactJsonFile = require('../lib/transact-json-file.js');
 
+var majorCommand = '{cmd} --major';
+var minorCommand = '{cmd} --minor';
+var patchCommand = '{cmd} --patch';
+var deprecatedCommand = 'echo DEPRECATED: please run either ' +
+    'of the changelog-patch or changelog-minor scripts; exit 1';
+
 function installModule(opts, cb) {
     var file = path.join(opts.folder, 'package.json');
+
+    opts.cmd = opts.cmd || 'build-changelog';
+    opts.packageVersion = opts.packageVersion || '^' + version;
 
     transactJsonFile(file, function (package) {
         package.scripts = package.scripts || {};
 
-        if (!package.scripts.changelog) {
-            package.scripts.changelog = 'build-changelog';
+        package.scripts['changelog-major'] =
+            template(majorCommand, opts);
+        package.scripts['changelog-minor'] =
+            template(minorCommand, opts);
+        package.scripts['changelog-patch'] =
+            template(patchCommand, opts);
+
+        if (package.scripts.changelog) {
+            package.scripts.changelog = deprecatedCommand;
         }
 
-        package.devDependencies = package.devDependencies || {};
-
-        package.devDependencies['build-changelog'] =
-            '^' + version;
+        if (!opts.onlyScripts) {
+            package.devDependencies = package.devDependencies || {};
+            package.devDependencies[opts.cmd] = opts.packageVersion;
+        }
 
         return package;
     }, cb);
