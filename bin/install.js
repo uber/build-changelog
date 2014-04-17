@@ -15,6 +15,7 @@ function installModule(opts, cb) {
 
     opts.cmd = opts.cmd || 'build-changelog';
     opts.packageVersion = opts.packageVersion || '^' + version;
+    opts.moduleName = opts.moduleName || 'build-changelog';
 
     transactJsonFile(file, function (package) {
         package.scripts = package.scripts || {};
@@ -32,7 +33,8 @@ function installModule(opts, cb) {
 
         if (!opts.onlyScripts) {
             package.devDependencies = package.devDependencies || {};
-            package.devDependencies[opts.cmd] = opts.packageVersion;
+            package.devDependencies[opts.moduleName] =
+                opts.packageVersion;
         }
 
         return package;
