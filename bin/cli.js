@@ -56,7 +56,7 @@ function main(opts) {
                 throw err;
             }
 
-            console.log('added build-changelog to package.json');
+            console.log('added %s to package.json', opts.cmd);
         });
     }
 
