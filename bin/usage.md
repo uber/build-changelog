@@ -6,6 +6,7 @@ Builds the CHANGELOG file and commits it to git. Either creates
 Options:
     --major            bump the major version number
     --minor            bump the minor version number
+    --hotfix=[str]     bump the release version with your message
     --log-flags=[str]  extra flags to pass to `git log`
     --folder=[str]     sets the git repo & CHANGELOG location
     --filename=[str]   the filename we write the CHANGELOG too
@@ -15,6 +16,7 @@ Options:
  - `--log-flags` defaults to `--decorate --oneline`
  - `--folder` defaults to `process.cwd()`
  - `--filename` defaults to `CHANGELOG`
+ - `--hotfix` defaults to `''`
 
 ## `{cmd} --help`
 
