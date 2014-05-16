@@ -15,6 +15,8 @@ function createNextVersion(currentVersion, opts) {
     } else if (opts.minor) {
         version.minor++;
         version.patch = 0;
+    } else if (opts.hotfix) {
+        version.prerelease = [opts.hotfix];
     } else if (opts.patch) {
         version.patch++;
     }
