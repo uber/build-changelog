@@ -1,6 +1,7 @@
 var parallel = require('continuable-para');
 var path = require('path');
 var fs = require('fs');
+var semver = require('semver');
 
 var computeVersion = require('./compute-version.js');
 var transactJsonFile = require('../lib/transact-json-file.js');
@@ -36,6 +37,13 @@ function updateVersion(opts, cb) {
     if (!opts.nextVersion) {
         computeVersion(opts, next);
     } else {
+        var versionStr = semver.parse(opts.nextVersion);
+        if (!versionStr) {
+            throw new Error('invalid version: ' + opts.nextVersion);
+        }
+
+        opts.nextVersion = versionStr.toString();
+
         next(null, opts.nextVersion);
     }
 }
